@@ -10,8 +10,8 @@ eprint = functools.partial(cprint, color='r', bcolor='g', mode='highlight')
 
 parser = argparse.ArgumentParser(description='A colorful calendar')
 parser.add_argument('--date', help='ISO format: 2018-2-11', default=datetime.date.today().isoformat(), dest='date')
-parser.add_argument('-b', '--background', help='background color', dest='bg')
-parser.add_argument('-f', '--foreground', help='foreground color', dest='fg')
+parser.add_argument('-b', '--background', help='background color', dest='bg', default='b')
+parser.add_argument('-f', '--foreground', help='foreground color', dest='fg', default='w')
 
 args = parser.parse_args()
 
@@ -81,5 +81,10 @@ def main():
         exit()
 
     first_day = zeller_formula(year, month, day)
-    show_calendar(start=first_day, end=days_count, today=day)
+    cprint('Today: {}-{}-{}'.format(year, month, day))
+    try:
+        show_calendar(start=first_day, end=days_count, today=day, color=args.fg, bcolor=args.bg)
+    except ValueError as error:
+        eprint(error)
+        exit()
 

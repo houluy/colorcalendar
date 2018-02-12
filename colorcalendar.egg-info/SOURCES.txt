@@ -8,4 +8,3 @@ colorcalendar.egg-info/dependency_links.txt
 colorcalendar.egg-info/entry_points.txt
 colorcalendar.egg-info/requires.txt
 colorcalendar.egg-info/top_level.txt
-test/test.py
