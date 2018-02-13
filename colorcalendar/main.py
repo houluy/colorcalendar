@@ -3,17 +3,26 @@ import datetime
 import functools
 import sys
 
+import colorcalendar
 from .colorcalendar import show_calendar, month_list
 from colorline import cprint
 
+__version__ = colorcalendar.__version__
+
 eprint = functools.partial(cprint, color='r', bcolor='g', mode='highlight')
 
+available_color = ['k', 'r', 'g', 'y', 'c', 'b', 'p', 'w']
+
 parser = argparse.ArgumentParser(description='A colorful calendar')
+parser.add_argument('-v', '--version', help='show version', version=__version__, action='version')
 parser.add_argument('--date', help='ISO format: 2018-2-11', default=datetime.date.today().isoformat(), dest='date')
-parser.add_argument('-b', '--background', help='background color', dest='bg', default='b')
-parser.add_argument('-f', '--foreground', help='foreground color', dest='fg', default='w')
+parser.add_argument('-b', '--background', help='background color', dest='bg', default='b', choices=available_color)
+parser.add_argument('-f', '--foreground', help='foreground color', dest='fg', default='w', choices=available_color)
+parser.add_argument('--frame', help='one character for frames', dest='frame', default='=')
 
 args = parser.parse_args()
+
+colorp = functools.partial(cprint, color=args.fg, bcolor=args.bg)
 
 start_year = 0
 end_year = 2100
@@ -81,10 +90,6 @@ def main():
         exit()
 
     first_day = zeller_formula(year, month, day)
-    cprint('Today: {}-{}-{}'.format(year, month, day))
-    try:
-        show_calendar(start=first_day, end=days_count, today=day, color=args.fg, bcolor=args.bg)
-    except ValueError as error:
-        eprint(error)
-        exit()
+    colorp('Today: {}-{}-{}'.format(year, month, day))
+    show_calendar(start=first_day, end=days_count, today=day, color=args.fg, bcolor=args.bg, frame=args.frame)
 
