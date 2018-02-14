@@ -92,5 +92,5 @@ def main():
 
     first_day = zeller_formula(year, month, day)
     colorp('Today: {}-{}-{}'.format(year, month, day))
-    show_calendar(start=first_day, end=days_count, today=day, color=args.fg, bcolor=args.bg, frame=args.frame, today_sign=args.today)
+    show_calendar(month=month, start=first_day, end=days_count, today=day, color=args.fg, bcolor=args.bg, frame=args.frame, today_sign=args.today)
 

@@ -18,11 +18,28 @@ month_list = [
     'December',
 ]
 
-def show_calendar(frame='=', start=7, end=31, today=1, today_sign='*', color='w', bcolor='b', mode='default'):
+def build_month(month):
+    month_str = [' ']*(LENGTH - 2)
+    month = month_list[month - 1]
+    month_len = len(month)
+    start = (LENGTH - month_len) // 2 - 1
+    end = start + month_len
+    for ind, c in enumerate(month):
+        month_str[start + ind] = c
+    month_str = ''.join(month_str)
+    month_str += '|'
+    month_str = '|' + month_str
+    return month_str
+
+def show_calendar(month=False, frame='=', start=7, end=31, today=1, today_sign='*', color='w', bcolor='b', mode='default'):
     # Validation
     assert end <= 31
     assert today <= end
-    up_frame = ''.join([frame]*LENGTH)
+    if month:
+        assert isinstance(month, int)
+    up_frame = ''.join([frame]*(LENGTH - 2))
+    up_frame = '*' + up_frame
+    up_frame += '*'
     title = '|SUN  MON  TUE  WEN  THU  FRI  SAT|'
     start = start % WEEK #Sunday is zero
     out_str = '\n'.join([up_frame, title, up_frame])
@@ -64,6 +81,8 @@ def show_calendar(frame='=', start=7, end=31, today=1, today_sign='*', color='w'
             break
         line += 1
     out_str = '\n'.join([out_str, up_frame])
+    if month:
+        out_str = '\n'.join([out_str, build_month(month), up_frame])
     cprint(out_str, color=color, bcolor=bcolor, mode=mode)
 
 if __name__ == '__main__':
