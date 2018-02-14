@@ -19,6 +19,7 @@ parser.add_argument('--date', help='ISO format: 2018-2-11', default=datetime.dat
 parser.add_argument('-b', '--background', help='background color', dest='bg', default='b', choices=available_color)
 parser.add_argument('-f', '--foreground', help='foreground color', dest='fg', default='w', choices=available_color)
 parser.add_argument('--frame', help='one character for frames', dest='frame', default='=')
+parser.add_argument('-t', '--today-sign', help='character for today', dest='today', default='*')
 
 args = parser.parse_args()
 
@@ -91,5 +92,5 @@ def main():
 
     first_day = zeller_formula(year, month, day)
     colorp('Today: {}-{}-{}'.format(year, month, day))
-    show_calendar(start=first_day, end=days_count, today=day, color=args.fg, bcolor=args.bg, frame=args.frame)
+    show_calendar(start=first_day, end=days_count, today=day, color=args.fg, bcolor=args.bg, frame=args.frame, today_sign=args.today)
 
