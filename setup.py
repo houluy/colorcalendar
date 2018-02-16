@@ -7,7 +7,7 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name='colorcalendar',
-    version='1.0.1',
+    version='1.0.5',
     description='A calendar for command-line in Linux',
     url='https://github.com/houluy/calendar',
     author='Houlu',

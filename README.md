@@ -8,7 +8,11 @@ Use `pip` to install this tool
 
 ## Usage
 
+See help:
+
     colorcalendar -h
+
+Basic:
 
     colorcalendar --date 2018-2-11
 

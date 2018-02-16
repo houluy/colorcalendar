@@ -5,3 +5,6 @@ Init version
 
 ## Calendar 1.0.1
 Add Exceptions
+
+## Calendar 1.0.4
+Add argument
