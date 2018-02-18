@@ -9,17 +9,20 @@ from colorline import cprint
 
 __version__ = colorcalendar.__version__
 
-eprint = functools.partial(cprint, color='r', bcolor='g', mode='highlight')
+eprint = functools.partial(cprint, color='r', bcolor='c', mode='highlight')
 
 available_color = ['k', 'r', 'g', 'y', 'c', 'b', 'p', 'w']
 
-parser = argparse.ArgumentParser(description='A colorful calendar')
+parser = argparse.ArgumentParser(description='A colorful calendar', prefix_chars='-+')
 parser.add_argument('-v', '--version', help='show version', version=__version__, action='version')
-parser.add_argument('--date', help='ISO format: 2018-2-11', default=datetime.date.today().isoformat(), dest='date')
+parser.add_argument('--date', help='ISO format: 2018-2-11', default=datetime.date.today().isoformat())
+parser.add_argument('-y', '--year', help='specify a year to display', default=None)
+parser.add_argument('-c', '--color', help='disable color', action='store_false')
 parser.add_argument('-b', '--background', help='background color', dest='bg', default='b', choices=available_color)
 parser.add_argument('-f', '--foreground', help='foreground color', dest='fg', default='w', choices=available_color)
-parser.add_argument('--frame', help='one character for frames', dest='frame', default='=')
+parser.add_argument('--frame', help='one character for frames', default='=')
 parser.add_argument('-t', '--today-sign', help='character for today', dest='today', default='*')
+parser.add_argument('-m', '--month', help='specify a month to display', default=None)
 
 args = parser.parse_args()
 
@@ -76,14 +79,7 @@ def zeller_formula(year, month, day):
     else:
         return first_day + 4
 
-def main():
-    try:
-        year, month, day = [int(x) for x in args.date.split('-')]
-    except ValueError:
-        #Date must be integer, must be format year-mo-da
-        eprint('Invalid date, please refer to the ISO format: 2018-2-11')
-        exit()
-
+def show(year, month, day):
     try:
         days_count = check_date(year, month, day)
     except ValueError as error:
@@ -91,6 +87,36 @@ def main():
         exit()
 
     first_day = zeller_formula(year, month, day)
-    colorp('Today: {}-{}-{}'.format(year, month, day))
-    show_calendar(month=month, start=first_day, end=days_count, today=day, color=args.fg, bcolor=args.bg, frame=args.frame, today_sign=args.today)
+    if args.color:
+        colorp('Today: {}-{}-{}'.format(year, month, day))
+    else:
+        print('Today: {}-{}-{}'.format(year, month, day))
+    show_calendar(month=month, start=first_day, end=days_count, today=day, fcolor=args.fg, bcolor=args.bg, frame=args.frame, today_sign=args.today, color=args.color)
 
+
+def main():
+    if args.year:
+        if args.month:
+            date = [args.year, args.month, 1]
+        else:
+            date = [args.year, 0, 1]
+    else:
+        if args.month:
+            eprint('Month cannot be assigned without year')
+            exit()
+        date = args.date.split('-')
+
+    try:
+        year, month, day = [int(x) for x in date]
+    except ValueError:
+        #Date must be integer, must be format year-mo-da
+        eprint('Invalid date, please refer to the ISO format: 2018-2-11, or specify correct year or month')
+        exit()
+
+    if month == 0:
+        month = range(1, 13)
+    else:
+        month = [month]
+
+    for m in month:
+        show(year, m, day)

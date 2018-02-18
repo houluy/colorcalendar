@@ -2,12 +2,13 @@ from setuptools import setup, find_packages
 
 from codecs import open
 from os import path
+import colorcalendar
 
 here = path.abspath(path.dirname(__file__))
 
 setup(
     name='colorcalendar',
-    version='1.0.5',
+    version=colorcalendar.__version__,
     description='A calendar for command-line in Linux',
     url='https://github.com/houluy/calendar',
     author='Houlu',

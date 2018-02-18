@@ -8,3 +8,6 @@ Add Exceptions
 
 ## Calendar 1.0.4
 Add argument
+
+## Calendar 1.0.6
+Add 'year', 'month' arguments

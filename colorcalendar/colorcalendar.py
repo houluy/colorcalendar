@@ -31,7 +31,7 @@ def build_month(month):
     month_str = '|' + month_str
     return month_str
 
-def show_calendar(month=False, frame='=', start=7, end=31, today=1, today_sign='*', color='w', bcolor='b', mode='default'):
+def show_calendar(month=False, frame='=', start=7, end=31, today=1, today_sign='*', fcolor='w', bcolor='b', mode='default', color=True):
     # Validation
     assert end <= 31
     assert today <= end
@@ -83,7 +83,10 @@ def show_calendar(month=False, frame='=', start=7, end=31, today=1, today_sign='
     out_str = '\n'.join([out_str, up_frame])
     if month:
         out_str = '\n'.join([out_str, build_month(month), up_frame])
-    cprint(out_str, color=color, bcolor=bcolor, mode=mode)
+    if color:
+        cprint(out_str, color=fcolor, bcolor=bcolor, mode=mode)
+    else:
+        print(out_str)
 
 if __name__ == '__main__':
     show_calendar(frame='&', start=1, end=31)
