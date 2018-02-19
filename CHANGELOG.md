@@ -11,3 +11,6 @@ Add argument
 
 ## Calendar 1.0.6
 Add 'year', 'month' arguments
+
+## Calendar 1.0.7
+Add 'today' argument

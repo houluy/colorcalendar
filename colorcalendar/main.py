@@ -17,12 +17,13 @@ parser = argparse.ArgumentParser(description='A colorful calendar', prefix_chars
 parser.add_argument('-v', '--version', help='show version', version=__version__, action='version')
 parser.add_argument('--date', help='ISO format: 2018-2-11', default=datetime.date.today().isoformat())
 parser.add_argument('-y', '--year', help='specify a year to display', default=None)
-parser.add_argument('-c', '--color', help='disable color', action='store_false')
-parser.add_argument('-b', '--background', help='background color', dest='bg', default='b', choices=available_color)
-parser.add_argument('-f', '--foreground', help='foreground color', dest='fg', default='w', choices=available_color)
-parser.add_argument('--frame', help='one character for frames', default='=')
-parser.add_argument('-t', '--today-sign', help='character for today', dest='today', default='*')
 parser.add_argument('-m', '--month', help='specify a month to display', default=None)
+parser.add_argument('-t', '--today', help='specify date of today to display', default=1)
+parser.add_argument('-f', '--foreground', help='foreground color', dest='fg', default='w', choices=available_color)
+parser.add_argument('-b', '--background', help='background color', dest='bg', default='b', choices=available_color)
+parser.add_argument('-c', '--color', help='disable color', action='store_false')
+parser.add_argument('--frame', help='one character for frames', default='=')
+parser.add_argument('--today-sign', help='character for today', dest='today_sign', default='*')
 
 args = parser.parse_args()
 
@@ -91,15 +92,15 @@ def show(year, month, day):
         colorp('Today: {}-{}-{}'.format(year, month, day))
     else:
         print('Today: {}-{}-{}'.format(year, month, day))
-    show_calendar(month=month, start=first_day, end=days_count, today=day, fcolor=args.fg, bcolor=args.bg, frame=args.frame, today_sign=args.today, color=args.color)
+    show_calendar(month=month, start=first_day, end=days_count, today=day, fcolor=args.fg, bcolor=args.bg, frame=args.frame, today_sign=args.today_sign, color=args.color)
 
 
 def main():
     if args.year:
         if args.month:
-            date = [args.year, args.month, 1]
+            date = [args.year, args.month, args.today]
         else:
-            date = [args.year, 0, 1]
+            date = [args.year, 0, args.today]
     else:
         if args.month:
             eprint('Month cannot be assigned without year')
