@@ -1,5 +1,7 @@
 # This is a Colorful Calendar for Linux
 
+[![PyPI](https://img.shields.io/pypi/pyversions/Django.svg?style=plastic)]()
+
 ## Installation
 Use `pip` to install this tool
 
