@@ -20,7 +20,7 @@ parser.add_argument('-y', '--year', help='specify a year to display', default=No
 parser.add_argument('-m', '--month', help='specify a month to display', default=None)
 parser.add_argument('-t', '--today', help='specify date of today to display', default=1)
 parser.add_argument('-f', '--foreground', help='foreground color', dest='fg', default='w', choices=available_color)
-parser.add_argument('-b', '--background', help='background color', dest='bg', default='b', choices=available_color)
+parser.add_argument('-b', '--background', help='background color', dest='bg', default='r', choices=available_color)
 parser.add_argument('-c', '--color', help='disable color', action='store_false')
 parser.add_argument('--frame', help='one character for frames', default='=')
 parser.add_argument('--today-sign', help='character for today', dest='today_sign', default='*')
