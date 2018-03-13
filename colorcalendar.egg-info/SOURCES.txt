@@ -1,3 +1,4 @@
+README.md
 setup.py
 colorcalendar/__init__.py
 colorcalendar/colorcalendar.py

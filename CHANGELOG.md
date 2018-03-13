@@ -14,3 +14,6 @@ Add 'year', 'month' arguments
 
 ## Calendar 1.0.7
 Add 'today' argument
+
+## Calendar 1.1.0
+Fix leap year

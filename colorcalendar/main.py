@@ -43,7 +43,7 @@ def check_date(year, month, day):
         raise ValueError('Day must be in [1, 31]')
 
     days_count = 31
-    leap_year = True if year % 4 == 0 else False
+    leap_year = True if ((year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)) else False
     if month == 2:
         days_count = 29
         if day > 29:

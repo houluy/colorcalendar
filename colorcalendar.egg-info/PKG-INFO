@@ -1,11 +1,12 @@
 Metadata-Version: 1.2
 Name: colorcalendar
-Version: 1.0.7
+Version: 1.1.0
 Summary: A calendar for command-line in Linux
 Home-page: https://github.com/houluy/calendar
 Author: Houlu
 Author-email: houlu8674@bupt.edu.cn
 License: MIT
+Description-Content-Type: UNKNOWN
 Description: UNKNOWN
 Keywords: calendar,colorful
 Platform: UNKNOWN
